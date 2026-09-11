@@ -45,12 +45,17 @@ function applyEntry(kind, n, entry) {
   n.title = entry.title != null ? entry.title : prefixOf(kind, n.name, n.title || "");
 }
 
-function applyNameFixes() {
-  const f = loadNameFixes();
+function applyFixMap(f) {
+  if (!f) return;
   Object.keys(FIX_LISTS).forEach((k) => {
     const o = f[k] || {};
     FIX_LISTS[k].forEach((n) => applyEntry(k, n, o[n.id]));
   });
+}
+
+function applyNameFixes() {
+  applyFixMap((window.SHARED_OVERRIDES || {}).nameFixes);
+  applyFixMap(loadNameFixes());
 }
 
 function setItemName(kind, id, name) {

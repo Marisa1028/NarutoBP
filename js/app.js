@@ -49,6 +49,10 @@ function el(tag, cls, text) {
   return n;
 }
 
+function isAdmin() {
+  return /(?:^|[?&])admin=1(?:&|$)/.test(location.search);
+}
+
 function searchBox(placeholder, value, onInput) {
   const inp = el("input");
   inp.type = "text";
@@ -419,7 +423,20 @@ function homeView() {
   };
   actions.appendChild(addBtn);
   actions.appendChild(fixBtn);
-  wrap.appendChild(actions);
+  if (isAdmin()) {
+    const exp = el("button", "", "导出");
+    exp.onclick = exportOverrides;
+    actions.appendChild(exp);
+  }
+  const footer = el("div", "home-footer");
+  const gh = el("a", "gh-link");
+  gh.href = "https://github.com/Marisa1028/NarutoBP";
+  gh.target = "_blank";
+  gh.rel = "noopener noreferrer";
+  gh.textContent = "github.com/Marisa1028/NarutoBP";
+  footer.appendChild(gh);
+  footer.appendChild(actions);
+  wrap.appendChild(footer);
   return wrap;
 }
 
@@ -1064,6 +1081,7 @@ function resultText() {
   return rows.join("\n");
 }
 
+loadSharedItems();
 loadCustomItems();
 snapshotOrigNames();
 applyNameFixes();

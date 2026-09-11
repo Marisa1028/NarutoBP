@@ -38,12 +38,31 @@ button, input { font-family: inherit; }
   justify-content: center;
   padding: 24px;
 }
-.home-actions {
+.home-footer {
   position: absolute;
+  left: 18px;
   right: 18px;
   bottom: 18px;
   display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.gh-link {
+  color: var(--muted);
+  font-size: 12px;
+  letter-spacing: 0.4px;
+  text-decoration: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
+}
+.gh-link:hover { color: var(--gold); }
+.home-actions {
+  display: flex;
   gap: 8px;
+  flex-shrink: 0;
 }
 .home-actions button {
   height: 36px;
@@ -629,12 +648,12 @@ input[type="text"]:focus { border-color: var(--gold); }
   .logo { margin-bottom: 16px; }
   .logo h1 { font-size: 22px; letter-spacing: 4px; }
   .logo p { letter-spacing: 3px; }
-  .home-actions {
+  .home-footer {
     left: 12px;
     right: 12px;
     bottom: calc(12px + env(safe-area-inset-bottom));
-    justify-content: flex-end;
   }
+  .gh-link { font-size: 11px; }
   input[type="text"] { font-size: 16px; }
 
   .draft {
